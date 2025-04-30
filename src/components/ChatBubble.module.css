@@ -1,0 +1,30 @@
+.chatBubble {
+    padding: 10px;
+    /* border-radius: 30px; */
+    margin: 5px 0;
+    max-width: 60%;
+    word-wrap: break-word;
+    font-size: 14px;
+    color: black;
+    /* position: relative; Needed for positioning the pseudo-element */
+}
+
+.chatBubbleSender {
+    background-color: #f2f8ef;
+    align-self: flex-end;
+    border-radius: 30px 30px 0 30px;
+}
+
+
+.chatBubbleReceiver {
+    background-color: #405c04;
+    align-self: flex-start;
+    border-radius: 30px 30px 30px 0;
+}
+
+.timestamp {
+    font-size: 10px;
+    color: #888;
+    text-align: right;
+    margin-top: 5px;
+}

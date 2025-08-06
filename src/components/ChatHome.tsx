@@ -1,43 +1,45 @@
 'use client';
 
+import React from "react";
 import styles from "./ChatHome.module.css";
-import ChatBubble from "@/components/ChatBubble";
-import InputContainer from "@/components/InputContainer";
-import React, { useState } from "react";
+import GroupPreview from "./GroupPreview";
 
 const ChatHome = () => {
-    const [messages, setMessages] = useState([
-        { text: "Hello!", isSender: true },
-        { text: "Hi there!", isSender: false },
-    ]);
-    const handleSendMessage = (messageText: string) => {
-        if (messageText.trim() === "") return;
+    // const ws = new WebSocket("ws://localhost:8000/ws");
 
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: messageText, isSender: true },
-        ]);
-    };
+    // const [groups, setGroups] = useState([
+    //     { id: 1, name: "Group 1" },
+    //     { id: 2, name: "Group 2" },
+    // ]);
+
+    const groups = [
+        { id: 1, name: "Group 1" },
+        { id: 2, name: "Group 2" },
+    ]
+
+    // const handleSendMessage = (messageText: string) => {
+    //     if (messageText.trim() === "") return;
+
+
+
+    //     ws.send(JSON.stringify({ message: messageText, user: "client" }));
+
+    //     // setMessages((prevMessages) => [
+    //     //     ...prevMessages,
+    //     //     { text: messageText, isSender: true },
+    //     // ]);
+    // };
 
     return (
-        <>
-            <div className={styles.chatContainer}>
-            {<>
-                <ChatBubble message="Hello!" isSender={true} />
-                <ChatBubble message="Hi there!" isSender={false} />
-                {messages.map((message, index) => (
-                    <ChatBubble
-                        key={index}
-                        message={message.text}
-                        isSender={message.isSender}
-                    />
-                ))}
-            </>}
-            </div>
-            <div className={styles.inputContainer}>
-                <InputContainer onSendMessage={handleSendMessage} />
-            </div>
-        </>
+        <div className={styles.chatsContainer}>
+            {groups.map((group) => (
+                <GroupPreview
+                    key={group.id}
+                    title={group.name}
+                    body="This is a group preview"
+                />
+            ))}
+        </div>
     );
 };
 

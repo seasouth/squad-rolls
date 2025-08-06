@@ -1,0 +1,17 @@
+{
+    "name": "Squad Rolls",
+    "short_name": "SquadRolls",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0eae0e",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "/party-blower.svg",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  

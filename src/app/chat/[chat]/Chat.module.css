@@ -1,0 +1,46 @@
+.headerContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: calc(20vh - 44px); */
+    height: 15vh;
+    /* padding: 16px; */
+    /* background-color: #f0f0f0; */
+    border-bottom: 1px solid #ccc;
+}
+
+.backButton {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.backButton img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    color: whitesmoke;
+}
+
+.chats {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    width: 100%;
+}
+
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    /* height: calc(100vh - 100px); */
+    height: 100%;;
+    width: 60%;
+    margin: auto;
+    gap: 32px;
+}

@@ -1,0 +1,24 @@
+.groupPreviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+}
+
+.groupPreview {
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

@@ -1,31 +1,13 @@
-.chatContainer {
+.chatsContainer {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 150px);
     width: 100%;
 }
 
-.inputContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ccc;
-    height: 100px;
+.horizontalLine {
     width: 100%;
-}
-
-.button {
-    background-color: #0eae0e;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 5px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 auto;
 }

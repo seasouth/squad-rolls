@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/party-blower.svg',
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

@@ -1,0 +1,40 @@
+.inputContainer {
+    width: 60%;
+    /* height: 10%; */
+    margin: auto;
+}
+
+.inputTextContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    margin-bottom: 6px;
+    align-items: flex-end;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 64px 10px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    resize: none;
+    transition: height 0.1s;
+}
+
+.button {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    background-color: #0eae0e;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 1;
+}

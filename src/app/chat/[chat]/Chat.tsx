@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./Chat.module.css";
 import ChatBubble from "@/components/ChatBubble";
 import InputContainer from "@/components/InputContainer";
+import { useWebSocketStore } from '@/stores/useWebSocketStore';
 
 interface ChatProps {
     chat: string;
@@ -16,10 +17,10 @@ interface Message {
 } 
 
 const Chat: React.FC<ChatProps> = ({ chat }) => {
+    const { socket } = useWebSocketStore();
     const wsRef = useRef<WebSocket | null>(null);
     const [isConnecting, setIsConnecting] = useState(false);
     const CONNECTION_TIMEOUT = 5000; // 5 seconds timeout
-    // const ws = new WebSocket("ws://localhost:8000/ws");
 
     console.log(`WebSocket URL: ${process.env.NEXT_PUBLIC_DEV_SERVER}`);
     console.log("chat ID:", chat);
@@ -30,31 +31,10 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
     ]
 
     useEffect(() => {
-        const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_DEV_SERVER}/ws`);
-        // const ws = new WebSocket("ws://localhost:8000/ws");
-        wsRef.current = ws;
+        // const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_DEV_SERVER}/ws`);
+        wsRef.current = socket;
 
         console.log("chat ID:", chat);
-        
-
-        ws.onopen = () => {
-            console.log("WebSocket connection established");
-            console.log(`${chat}`);
-        };
-
-        ws.onmessage = (event) => {
-            console.log("Received event:", event);
-            const data = JSON.parse(event.data);
-            console.log(data);
-        };
-
-        ws.onclose = () => {
-            console.log("WebSocket connection closed");
-        };
-
-        return () => {
-            ws.close();
-        };
     }, [chat]);
 
     const handleSendMessage = (messageText: string) => {

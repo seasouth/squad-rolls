@@ -11,3 +11,25 @@
     background-color: #ccc;
     margin: 0 auto;
 }
+
+.roll {
+    display: flex;
+    align-items: center;
+    background-color: rgb(92, 44, 214);
+    border-radius: 25px;
+}
+
+.rollButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: left;
+    width: 65px;
+    height: 65px;
+    margin: 10px;
+}
+
+.rollButton img {
+    width: 75px;
+}

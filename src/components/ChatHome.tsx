@@ -3,27 +3,27 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ChatHome.module.css";
 import GroupPreview from "./GroupPreview";
-import { useWebSocketStore } from '@/stores/useWebSocketStore';
+import useWebSocketStore from '@/stores/useWebSocketStore';
 import words from "~/data/words.json";
+import { useLiveQuery } from "dexie-react-hooks";
+import { groupsDB } from "~/lib/db";
 
 const ChatHome = () => {
-    const [groups, setGroups] = useState<{ id: number; name: string }[]>([]);
+    const [groups, setGroups] = useState<{ uuid: string; name: string, lastMessage: string }[]>([]);
     const { connect } = useWebSocketStore();
-    // const groups = [
-    //     { id: 1, name: "Group 1" },
-    //     { id: 2, name: "Group 2" },
-    // ]
+    const squads = useLiveQuery(() => groupsDB.groups.toArray());
 
-
-
-    const createNewSquad = () => {
+    const createNewSquad = async () => {
         const randomName = words.adjectives[Math.floor(Math.random() * words.adjectives.length)]
             + " " + words.nouns[Math.floor(Math.random() * words.nouns.length)];
 
         const newGroup = {
-            id: groups.length + 1,
+            uuid: crypto.randomUUID(),
             name: randomName,
+            lastMessage: "This is a new group",
         };
+
+        const id = await groupsDB.groups.add(newGroup);
 
         setGroups((prevGroups) => [...prevGroups, newGroup]);
     }
@@ -32,19 +32,24 @@ const ChatHome = () => {
         connect();
     }, []);
 
+    useEffect(() => {
+        console.log(squads);
+    }, [groups]);
+
     return (
         <div className={styles.chatsContainer}>
             <button className={styles.roll} onClick={createNewSquad}>
                 <div className={styles.rollButton}>
                     <img src="/dice1.svg" alt="Roll" />
                 </div>
-                <h3>Roll For a Squad :-)</h3>
+                <h2>Roll For a Squad :-)</h2>
             </button>
-            {groups.map((group) => (
+            {squads && squads.map((squad) => (
                 <GroupPreview
-                    key={group.id}
-                    title={group.name}
-                    body="This is a group preview"
+                    key={squad.uuid}
+                    uuid={squad.uuid}
+                    title={squad.name}
+                    body={squad.lastMessage}
                 />
             ))}
         </div>

@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./Chat.module.css";
 import ChatBubble from "@/components/ChatBubble";
 import InputContainer from "@/components/InputContainer";
-import { useWebSocketStore } from '@/stores/useWebSocketStore';
+import useWebSocketStore from '@/stores/useWebSocketStore';
+import useGroupStore from '@/stores/useGroupStore';
 
 interface ChatProps {
     chat: string;
@@ -18,9 +19,8 @@ interface Message {
 
 const Chat: React.FC<ChatProps> = ({ chat }) => {
     const { socket } = useWebSocketStore();
+    const { groupName } = useGroupStore();
     const wsRef = useRef<WebSocket | null>(null);
-    const [isConnecting, setIsConnecting] = useState(false);
-    const CONNECTION_TIMEOUT = 5000; // 5 seconds timeout
 
     console.log(`WebSocket URL: ${process.env.NEXT_PUBLIC_DEV_SERVER}`);
     console.log("chat ID:", chat);
@@ -31,10 +31,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
     ]
 
     useEffect(() => {
-        // const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_DEV_SERVER}/ws`);
         wsRef.current = socket;
-
-        console.log("chat ID:", chat);
     }, [chat]);
 
     const handleSendMessage = (messageText: string) => {
@@ -45,11 +42,8 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
             sender_id: "client",
             content: messageText,
         };
-        
-        const jsonValueForSend = JSON.stringify(message);
-        console.log("Sending message:", jsonValueForSend);
 
-        wsRef.current?.send(jsonValueForSend);
+        wsRef.current?.send(JSON.stringify(message));
     };
 
     return (
@@ -59,9 +53,8 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
                     <img src="/back-arrow.svg" alt="Back" />
                 </button>
                 <div className={styles.headerContent}>
-                    <h2 className={styles.chatTitle}>Chat</h2>
+                    <h2 className={styles.chatTitle}>{groupName}</h2>
                     <div className={styles.chatHeaderLine} />
-                    <h4 className={styles.chatSubtitle}>Group Name</h4>
                 </div>
                 
             </>

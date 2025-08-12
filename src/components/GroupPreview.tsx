@@ -1,23 +1,30 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import useGroupStore from '@/stores/useGroupStore';
 import styles from './GroupPreview.module.css';
 
 interface GroupPreviewProps {
+    uuid: string;
     title: string;
     body: string;
 }
 
-const GroupPreview: React.FC<GroupPreviewProps> = ({ title, body}) => {
+const GroupPreview: React.FC<GroupPreviewProps> = ({ uuid, title, body}) => {
     const navigate = useRouter();
-    const chatId = '550e8400-e29b-41d4-a716-446655440000'; // Replace with actual chat ID
+    const { setGroupName } = useGroupStore();
+
+    const handleClick = () => {
+        setGroupName(title);
+        navigate.push(`/chat/${uuid}`);
+    }
 
     return (
         <>
             <div 
                 className={styles.groupPreviewContainer}
-                onClick={() => navigate.push(`/chat/${chatId}`)}
+                onClick={handleClick}
             >
                 <div className={styles.groupPreview}>
                     <h2 className={styles.title}>{title}</h2>

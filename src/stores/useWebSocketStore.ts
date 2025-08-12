@@ -14,7 +14,7 @@ interface WebSocketStore {
   onMessage: (cb: MessageCallback) => void;
 }
 
-export const useWebSocketStore = create<WebSocketStore>((set, get) => {
+const useWebSocketStore = create<WebSocketStore>((set, get) => {
   let messageCallback: MessageCallback = () => {};
 
   return {
@@ -89,3 +89,5 @@ export const useWebSocketStore = create<WebSocketStore>((set, get) => {
     },
   };
 });
+
+export default useWebSocketStore;
